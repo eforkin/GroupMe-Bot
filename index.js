@@ -19,7 +19,7 @@ express()
     console.log(req);
     var form = new formidable.IncomingForm();
      var messageFields = {};
-     form.parse(request, function(err, fields, files) {
+     form.parse(req, function(err, fields, files) {
        if (err) console.error("bad incoming data " + err);
      });
 
