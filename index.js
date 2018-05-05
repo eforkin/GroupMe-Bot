@@ -15,8 +15,11 @@ express()
     res.send(cool());
   })
   .post('/', function (req, res) {
+
+    let name = ""
+    let message = ""
+
     console.log("WOOORKKK");
-    console.log(req);
     var form = new formidable.IncomingForm();
      var messageFields = {};
      form.parse(req, function(err, fields, files) {
@@ -27,6 +30,8 @@ express()
        messageFields[name] = value;
        console.log(messageFields[name]);
      });
+
+     console.log(messageFields);
 
 
     bot.respond(req, res);
