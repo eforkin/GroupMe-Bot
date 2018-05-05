@@ -15,7 +15,7 @@ express()
   })
   .post('/', function (req, res) {
     console.log("WOOORKKK");
-    console.log(JSON.parse(req));
+    console.log(req);
     bot.respond(req, res);
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
