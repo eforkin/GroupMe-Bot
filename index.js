@@ -11,7 +11,6 @@ express()
   .get('/', (req, res) => res.send("Hello World"))
   .get('/cool', (req, res) => res.send(cool()))
   .post('/', function (req, res) {
-     res.send('Got a POST request');
-     console.log("GOT A POST REQUEST");
+     bot.respond(req, res);
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
