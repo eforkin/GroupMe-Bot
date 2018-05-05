@@ -13,5 +13,5 @@ express()
   .post('/', function (req, res) {
      res.send('Got a POST request'));
      console.log("GOT A POST REQUEST");
-  }
+  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
