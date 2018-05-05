@@ -9,7 +9,10 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.send("Hello World"))
-  .get('/cool', (req, res) => res.send(cool()))
+  .get('/cool', function (req, res) {
+    console.log("ASFASDF");
+    res.send(cool());
+  })
   .post('/', function (req, res) {
     res.send(cool())
     console.log("WOOORKKK");
