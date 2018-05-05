@@ -10,5 +10,8 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.send("Hello World"))
   .get('/cool', (req, res) => res.send(cool()))
-  .post('/', (req, res) => res.send('Got a POST request'))
+  .post('/', function (req, res) {
+     res.send('Got a POST request'));
+     console.log("GOT A POST REQUEST");
+  }
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
