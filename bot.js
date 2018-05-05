@@ -45,9 +45,17 @@ function respond(req, res) {
 
    form.on('field', function(name, value) {
      messageFields[name] = value;
-     console.log(name);
-     console.log(messageFields[name]);
+    //  console.log(name);
+    //  console.log(messageFields[name]);
    });
+
+   while (!("name" in messageFields) && !("text")) {
+     continue;
+   }
+
+   console.log(messageFields["name"]);
+   console.log(messageFields["text"]);
+
 
   //  console.log(messageFields["name"]);
 
