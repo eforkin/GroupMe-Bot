@@ -28,28 +28,44 @@
 
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
+const formidable = require('formidable')
 
 var botID = process.env.BOT_ID;
 
 function respond(req, res) {
-  // console.log(req);
+  let name = ""
+  let message = ""
+
+  console.log("WOOORKKK");
+  var form = new formidable.IncomingForm();
+   var messageFields = {};
+   form.parse(req, function(err, fields, files) {
+     if (err) console.error("bad incoming data " + err);
+   });
+
+   form.on('field', function(name, value) {
+     messageFields[name] = value;
+     console.log(messageFields[name]);
+   });
+
+   console.log(messageFields["name"]);
+
   console.log("END");
 
 
-  if (req) {
-    var request = JSON.parse(req.chunks[0]);
-    var botRegex = /^\/cool guy$/;
-
-    if(request.text) {
-      res.writeHead(200);
-      postMessage();
-      res.end();
-    } else {
-      console.log("don't care");
-      res.writeHead(200);
-      res.end();
-    }
-  }
+  // if (req) {
+  //   var botRegex = /^\/cool guy$/;
+  //
+  //   if(request.text) {
+  //     res.writeHead(200);
+  //     postMessage();
+  //     res.end();
+  //   } else {
+  //     console.log("don't care");
+  //     res.writeHead(200);
+  //     res.end();
+  //   }
+  // }
 }
 function postMessage() {
   var botResponse, options, body, botReq;
