@@ -25,9 +25,10 @@ express()
 
      form.on('field', function(name, value) {
        messageFields[name] = value;
+       console.log(messageFields[name]);
      });
 
-     console.log(messageFields[name]);
+
     bot.respond(req, res);
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
