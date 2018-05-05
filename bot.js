@@ -45,10 +45,11 @@ function respond(req, res) {
 
    form.on('field', function(name, value) {
      messageFields[name] = value;
+     console.log(name);
      console.log(messageFields[name]);
    });
 
-   console.log(messageFields["name"]);
+  //  console.log(messageFields["name"]);
 
   console.log("END");
 
