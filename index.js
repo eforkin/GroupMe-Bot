@@ -1,6 +1,7 @@
 const cool = require('cool-ascii-faces')
 const express = require('express')
 const path = require('path')
+const formidable = require('formidable')
 const bot = require('./bot.js');
 const PORT = process.env.PORT || 5000
 
@@ -16,6 +17,17 @@ express()
   .post('/', function (req, res) {
     console.log("WOOORKKK");
     console.log(req);
+    var form = new formidable.IncomingForm();
+     var messageFields = {};
+     form.parse(request, function(err, fields, files) {
+       if (err) console.error("bad incoming data " + err);
+     });
+
+     form.on('field', function(name, value) {
+       messageFields[name] = value;
+     });
+
+     console.log(messageFields[name]);
     bot.respond(req, res);
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
