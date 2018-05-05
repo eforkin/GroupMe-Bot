@@ -14,8 +14,9 @@ express()
     res.send(cool());
   })
   .post('/', function (req, res) {
-    res.send(cool())
     console.log("WOOORKKK");
+    console.log(req);
+    console.log(res);
     bot.respond(req, res);
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
