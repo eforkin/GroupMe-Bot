@@ -32,21 +32,21 @@ var cool = require('cool-ascii-faces');
 var botID = process.env.BOT_ID;
 
 function respond(req, res) {
-  console.log(this.req);
-  res.send(cool())
+  console.log(req);
 
-  if (this.req) {
-    var request = JSON.parse(this.req.chunks[0]);
+
+  if (req) {
+    var request = JSON.parse(req.chunks[0]);
     var botRegex = /^\/cool guy$/;
 
     if(request.text) {
-      this.res.writeHead(200);
+      res.writeHead(200);
       postMessage();
-      this.res.end();
+      res.end();
     } else {
       console.log("don't care");
-      this.res.writeHead(200);
-      this.res.end();
+      res.writeHead(200);
+      res.end();
     }
   }
 }
