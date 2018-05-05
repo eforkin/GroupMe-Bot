@@ -32,7 +32,8 @@ var cool = require('cool-ascii-faces');
 var botID = process.env.BOT_ID;
 
 function respond(req, res) {
-  console.log(req);
+  // console.log(req);
+  console.log("END");
 
 
   if (req) {
