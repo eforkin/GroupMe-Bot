@@ -11,7 +11,6 @@ var botName = process.env.NAME;
 function respond(req, res) {
   let name = ""
   let message = ""
-  let sentMessage = false;
 
   console.log("WOOORKKK");
   var form = new formidable.IncomingForm();
@@ -22,16 +21,22 @@ function respond(req, res) {
 
   form.on('field', function(name, value) {
     messageFields[name] = value;
+  });
 
-    if ("name" in messageFields && "text" in messageFields && !sentMessage && messageFields["name"] != botName) {
-      sentMessage = true;
+  form.on('end', function() {
+
+    console.log(messageFields["name"]);
+    console.log(botName);
+
+    if (messageFields["name"] != botName) {
+
       console.log(messageFields["name"]);
       console.log(messageFields["text"]);
 
       name = messageFields["name"];
       message = messageFields["text"];
 
-      if(message = "Hey") {
+      if(message == "Hey") {
         // var botRegex = /^\/cool guy$/;
 
         res.writeHead(200);
@@ -44,7 +49,10 @@ function respond(req, res) {
       }
     }
 
-  });
+      // response.writeHead(200, {"Content-Type": "text/plain"});
+      // response.end("THANKS");
+      // self.emit('botMessage', self, { name:messageFields.name, text:messageFields.text });
+    });
 }
 function postMessage() {
   var botResponse = cool();
