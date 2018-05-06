@@ -4,10 +4,9 @@ const util = require('util');
 const cool = require('cool-ascii-faces');
 const formidable = require('formidable');
 
-const captionbot = require('captionbot');
-
-var botID = process.env.BOT_ID;
-var botName = process.env.NAME;
+let botID = process.env.BOT_ID;
+let botName = process.env.NAME;
+let _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 function respond(req, res) {
   let name = ""
@@ -52,6 +51,7 @@ function postMessage(message, name, attachment) {
 
   let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
   let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/;
+  let mackRegex = /[mM][aA][cC][kK][eE][nN][zZ][iI][eE]/;
 
   let botResponse;
 
@@ -61,12 +61,12 @@ function postMessage(message, name, attachment) {
   if (botRegex.test(message)) {
     botResponse = cool();
   }
-  else if (attachment && captionThisRegex.test(message)) {
-    captionbot(attachment[0].url)
-    .then(caption => {
-      botResponse = caption;
-      console.log(caption);
-    });
+  else if (mackRegex.test(message)) {
+    const curDate = new Date();
+    const theDate = new Date("12/9/2017");
+    let totalDays = dateDiffInDays(theDate, curDate);
+
+    botResponse = "It has been " + parseInt(totalDays) + " days since Chris had sex with Mackenzie."
   }
 
   console.log('sending ' + botResponse + ' to ' + botID);
@@ -76,6 +76,15 @@ function postMessage(message, name, attachment) {
   package.text = botResponse;
   package.bot_id = botID;
   request( { url:url, method:'POST', body: JSON.stringify(package) });
+}
+
+// a and b are javascript Date objects
+function dateDiffInDays(a, b) {
+  // Discard the time and time-zone information.
+  let utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+  let utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
 
 exports.respond = respond;
