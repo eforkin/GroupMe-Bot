@@ -2,7 +2,9 @@ const request = require('request');
 const events = require('events');
 const util = require('util');
 const cool = require('cool-ascii-faces');
-const formidable = require('formidable')
+const formidable = require('formidable');
+
+const captionbot = require('captionbot');
 
 var botID = process.env.BOT_ID;
 var botName = process.env.NAME;
@@ -31,24 +33,40 @@ function respond(req, res) {
 
       name = messageFields["name"];
       message = messageFields["text"];
+      attachment = messageFields["attachments"];
 
       let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
+      let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/;
 
-      if(message && botRegex.test(message)) {
-
+      if (message) {
         res.writeHead(200);
-        postMessage();
+        postMessage(message)
         res.end();
-      } else {
+      }
+      else {
         console.log("don't care");
         res.writeHead(200);
         res.end();
       }
+
+
+
     }
   });
 }
-function postMessage() {
-  let botResponse = cool();
+function postMessage(message) {
+  let botResponse;
+  if (botRegex.test(message)) {
+    botResponse = cool();
+  }
+  else if (attachment && captionThisRegex.test(message)) {
+    captionbot(attachment[0]["url"])
+    .then(caption => {
+      botResponse = caption;
+      console.log(caption);
+    });
+  }
+
 
   console.log('sending ' + botResponse + ' to ' + botID);
 
