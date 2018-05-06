@@ -27,7 +27,7 @@ function respond(req, res) {
 
       console.log(messageFields["name"]);
       console.log(messageFields["text"]);
-      console.log(messageFields["attachments"];
+      console.log(messageFields["attachments"]);
 
       name = messageFields["name"];
       message = messageFields["text"];
