@@ -62,7 +62,7 @@ function postMessage(message, name, attachment) {
     botResponse = cool();
   }
   else if (attachment && captionThisRegex.test(message)) {
-    captionbot(attachment[0]["url"])
+    captionbot(attachment[0].url)
     .then(caption => {
       botResponse = caption;
       console.log(caption);
