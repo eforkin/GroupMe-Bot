@@ -49,9 +49,9 @@ function respond(req, res) {
     console.log(messageFields);
    });
 
-   while (!("name" in messageFields) ||  !("text" in messageFields)) {
-     continue;
-   }
+  //  while (!("name" in messageFields) ||  !("text" in messageFields)) {
+  //    continue;
+  //  }
 
    console.log(messageFields["name"]);
    console.log(messageFields["text"]);
