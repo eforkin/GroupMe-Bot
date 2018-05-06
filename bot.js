@@ -31,6 +31,7 @@ var cool = require('cool-ascii-faces');
 const formidable = require('formidable')
 
 var botID = process.env.BOT_ID;
+var botName = process.env.NAME;
 
 function respond(req, res) {
   let name = ""
@@ -47,7 +48,7 @@ function respond(req, res) {
   form.on('field', function(name, value) {
     messageFields[name] = value;
 
-    if ("name" in messageFields && "text" in messageFields && !sentMessage) {
+    if ("name" in messageFields && "text" in messageFields && !sentMessage && messageFields["name"] != botName) {
       sentMessage = true;
       console.log(messageFields["name"]);
       console.log(messageFields["text"]);
