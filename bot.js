@@ -1,8 +1,7 @@
-var HTTPS = require('https');
 const request = require('request');
 const events = require('events');
 const util = require('util');
-var cool = require('cool-ascii-faces');
+const cool = require('cool-ascii-faces');
 const formidable = require('formidable')
 
 var botID = process.env.BOT_ID;
@@ -12,8 +11,8 @@ function respond(req, res) {
   let name = ""
   let message = ""
 
-  var form = new formidable.IncomingForm();
-  var messageFields = {};
+  let form = new formidable.IncomingForm();
+  let messageFields = {};
   form.parse(req, function(err, fields, files) {
     if (err) console.error("bad incoming data " + err);
   });
@@ -28,6 +27,7 @@ function respond(req, res) {
 
       console.log(messageFields["name"]);
       console.log(messageFields["text"]);
+      console.log(messageFields["attachments"];
 
       name = messageFields["name"];
       message = messageFields["text"];
@@ -48,12 +48,12 @@ function respond(req, res) {
   });
 }
 function postMessage() {
-  var botResponse = cool();
+  let botResponse = cool();
 
   console.log('sending ' + botResponse + ' to ' + botID);
 
-  var url = 'https://api.groupme.com/v3/bots/post';
-  var package = {};
+  let url = 'https://api.groupme.com/v3/bots/post';
+  let package = {};
   package.text = botResponse;
   package.bot_id = botID;
   request( { url:url, method:'POST', body: JSON.stringify(package) });
