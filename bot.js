@@ -1,38 +1,45 @@
-// var bot = require('fancy-groupme-bot');
-// var util = require('util');
-//
-// // local configuration read from env.
-// const TOKEN = process.env.TOKEN; // your groupme api token
-// const GROUP = process.env.GROUP; // the room you want to join
-// const NAME = process.env.NAME; // the name of your bot
-// const URL = process.env.CALLBACK // the domain you're serving from, should be accessible by Groupme.
-// const CONFIG = {token:TOKEN, group:GROUP, name:NAME, url:URL};
-//
-// var mybot = bot(CONFIG);
-//
-// mybot.on('botRegistered', function(b) {
-//   console.log("I am registered");
-//   b.message("WHAT UP BRO?");
-// });
-//
-// mybot.on('botMessage', function(b, message) {
-//   console.log("I got a message, fyi");
-//   if (message.name != b.name) {
-//     b.message(message.name + " said " + message.text);
-//   }
-// });
-//
-// console.log("i am serving");
-// mybot.serve(8000);
-
-
 var HTTPS = require('https');
 const request = require('request');
+const events = require('events');
+const util = require('util');
 var cool = require('cool-ascii-faces');
 const formidable = require('formidable')
 
 var botID = process.env.BOT_ID;
 var botName = process.env.NAME;
+
+Bot.prototype.serve = function(address) {
+  var self = this;
+  var server = http.createServer(function (request, response) {
+    if (request.url == '/' && request.method == 'GET') {
+      response.writeHead(200, {"Content-Type": "application/json"});
+      response.end(JSON.stringify({'name': self.name, 'group': self.group}));
+    } else if (request.url == '/incoming' && request.method == 'POST') {
+      var form = new formidable.IncomingForm();
+      var messageFields = {};
+      form.parse(request, function(err, fields, files) {
+        if (err) console.error("bad incoming data " + err);
+      });
+
+      form.on('field', function(name, value) {
+        messageFields[name] = value;
+      });
+
+      form.on('end', function() {
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.end("THANKS");
+        self.emit('botMessage', self, { name:messageFields.name, text:messageFields.text });
+      });
+
+    } else {
+      response.writeHead(404, {"Content-Type": "text/plain"});
+      response.end("NOT FOUND");
+    }
+
+  }.bind(this));
+
+  server.listen(address);
+};
 
 function respond(req, res) {
   let name = ""
