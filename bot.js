@@ -32,9 +32,9 @@ function respond(req, res) {
       name = messageFields["name"];
       message = messageFields["text"];
 
-      const coolGuyRegex = /^\/[cC][oO][oO][lL] [gG][uU][yY]$/;
+      let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
 
-      if(message && coolGuyRegex.test(message)) {
+      if(message && botRegex.test(message)) {
 
         res.writeHead(200);
         postMessage();
