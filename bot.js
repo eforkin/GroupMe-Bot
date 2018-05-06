@@ -8,39 +8,6 @@ const formidable = require('formidable')
 var botID = process.env.BOT_ID;
 var botName = process.env.NAME;
 
-Bot.prototype.serve = function(address) {
-  var self = this;
-  var server = http.createServer(function (request, response) {
-    if (request.url == '/' && request.method == 'GET') {
-      response.writeHead(200, {"Content-Type": "application/json"});
-      response.end(JSON.stringify({'name': self.name, 'group': self.group}));
-    } else if (request.url == '/incoming' && request.method == 'POST') {
-      var form = new formidable.IncomingForm();
-      var messageFields = {};
-      form.parse(request, function(err, fields, files) {
-        if (err) console.error("bad incoming data " + err);
-      });
-
-      form.on('field', function(name, value) {
-        messageFields[name] = value;
-      });
-
-      form.on('end', function() {
-        response.writeHead(200, {"Content-Type": "text/plain"});
-        response.end("THANKS");
-        self.emit('botMessage', self, { name:messageFields.name, text:messageFields.text });
-      });
-
-    } else {
-      response.writeHead(404, {"Content-Type": "text/plain"});
-      response.end("NOT FOUND");
-    }
-
-  }.bind(this));
-
-  server.listen(address);
-};
-
 function respond(req, res) {
   let name = ""
   let message = ""
