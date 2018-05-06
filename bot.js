@@ -38,33 +38,31 @@ function respond(req, res) {
 
   console.log("WOOORKKK");
   var form = new formidable.IncomingForm();
-   var messageFields = {};
-   form.parse(req, function(err, fields, files) {
-     if (err) console.error("bad incoming data " + err);
-   });
+  var messageFields = {};
+  form.parse(req, function(err, fields, files) {
+    if (err) console.error("bad incoming data " + err);
+  });
 
-   form.on('field', function(name, value) {
-     messageFields[name] = value;
+  form.on('field', function(name, value) {
+    messageFields[name] = value;
 
     if ("name" in messageFields && "text" in messageFields) {
       console.log(messageFields["name"]);
       console.log(messageFields["text"]);
-    }
-   });
 
-  // if (req) {
-  //   var botRegex = /^\/cool guy$/;
-  //
-  //   if(request.text) {
-  //     res.writeHead(200);
-  //     postMessage();
-  //     res.end();
-  //   } else {
-  //     console.log("don't care");
-  //     res.writeHead(200);
-  //     res.end();
-  //   }
-  // }
+      if(request.text) {
+        // var botRegex = /^\/cool guy$/;
+
+        res.writeHead(200);
+        postMessage();
+        res.end();
+      } else {
+        console.log("don't care");
+        res.writeHead(200);
+        res.end();
+      }
+    }
+  });
 }
 function postMessage() {
   var botResponse, options, body, botReq;
@@ -85,11 +83,11 @@ function postMessage() {
   console.log('sending ' + botResponse + ' to ' + botID);
 
   botReq = HTTPS.request(options, function(res) {
-      if(res.statusCode == 202) {
-        //neat
-      } else {
-        console.log('rejecting bad status code ' + res.statusCode);
-      }
+    if(res.statusCode == 202) {
+      //neat
+    } else {
+      console.log('rejecting bad status code ' + res.statusCode);
+    }
   });
 
   botReq.on('error', function(err) {
