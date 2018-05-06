@@ -37,7 +37,7 @@ function respond(req, res) {
 
       if (message) {
         res.writeHead(200);
-        postMessage(message)
+        postMessage(message, name, attachment)
         res.end();
       }
       else {
@@ -48,7 +48,7 @@ function respond(req, res) {
     }
   });
 }
-function postMessage(message) {
+function postMessage(message, name, attachment) {
 
   let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
   let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/;
