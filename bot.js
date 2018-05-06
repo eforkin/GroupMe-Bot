@@ -35,6 +35,7 @@ var botID = process.env.BOT_ID;
 function respond(req, res) {
   let name = ""
   let message = ""
+  let sentMessage = false;
 
   console.log("WOOORKKK");
   var form = new formidable.IncomingForm();
@@ -46,7 +47,8 @@ function respond(req, res) {
   form.on('field', function(name, value) {
     messageFields[name] = value;
 
-    if ("name" in messageFields && "text" in messageFields) {
+    if ("name" in messageFields && "text" in messageFields && !sentMessage) {
+      sentMessage = true;
       console.log(messageFields["name"]);
       console.log(messageFields["text"]);
 
@@ -65,6 +67,7 @@ function respond(req, res) {
         res.end();
       }
     }
+
   });
 }
 function postMessage() {
