@@ -45,22 +45,12 @@ function respond(req, res) {
 
    form.on('field', function(name, value) {
      messageFields[name] = value;
-    //  console.log(name);
-    console.log(messageFields);
+
+    if ("name" in messageFields && "text" in messageFields) {
+      console.log(messageFields["name"]);
+      console.log(messageFields["text"]);
+    }
    });
-
-  //  while (!("name" in messageFields) ||  !("text" in messageFields)) {
-  //    continue;
-  //  }
-
-   console.log(messageFields["name"]);
-   console.log(messageFields["text"]);
-
-
-  //  console.log(messageFields["name"]);
-
-  console.log("END");
-
 
   // if (req) {
   //   var botRegex = /^\/cool guy$/;
