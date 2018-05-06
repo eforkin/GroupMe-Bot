@@ -55,9 +55,6 @@ function postMessage(message, name, attachment) {
 
   let botResponse;
 
-  console.log("attachment test...");
-  console.log(attachment[0].url);
-
   if (botRegex.test(message)) {
     botResponse = cool();
   }
