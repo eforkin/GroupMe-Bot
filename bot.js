@@ -12,7 +12,6 @@ function respond(req, res) {
   let name = ""
   let message = ""
 
-  console.log("WOOORKKK");
   var form = new formidable.IncomingForm();
   var messageFields = {};
   form.parse(req, function(err, fields, files) {
@@ -25,9 +24,6 @@ function respond(req, res) {
 
   form.on('end', function() {
 
-    console.log(messageFields["name"]);
-    console.log(botName);
-
     if (messageFields["name"] != botName) {
 
       console.log(messageFields["name"]);
@@ -36,8 +32,9 @@ function respond(req, res) {
       name = messageFields["name"];
       message = messageFields["text"];
 
-      if(message == "Hey") {
-        // var botRegex = /^\/cool guy$/;
+      const coolGuyRegex = /^\/[cC][oO][oO][lL] [gG][uU][yY]$/;
+
+      if(message && coolGuyRegex.test(message)) {
 
         res.writeHead(200);
         postMessage();
@@ -48,11 +45,7 @@ function respond(req, res) {
         res.end();
       }
     }
-
-      // response.writeHead(200, {"Content-Type": "text/plain"});
-      // response.end("THANKS");
-      // self.emit('botMessage', self, { name:messageFields.name, text:messageFields.text });
-    });
+  });
 }
 function postMessage() {
   var botResponse = cool();
@@ -65,6 +58,5 @@ function postMessage() {
   package.bot_id = botID;
   request( { url:url, method:'POST', body: JSON.stringify(package) });
 }
-
 
 exports.respond = respond;
