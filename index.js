@@ -13,7 +13,7 @@ express()
     console.log("ASFASDF");
     res.send(cool());
   })
-  .post('/', function (req, res) {
+  .post('/incoming', function (req, res) {
     bot.respond(req, res);
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
