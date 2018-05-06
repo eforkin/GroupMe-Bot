@@ -64,7 +64,7 @@ function respond(req, res) {
       name = messageFields["name"];
       message = messageFields["text"];
 
-      if(message) {
+      if(message = "Hey") {
         // var botRegex = /^\/cool guy$/;
 
         res.writeHead(200);
