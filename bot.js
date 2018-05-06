@@ -35,9 +35,6 @@ function respond(req, res) {
       message = messageFields["text"];
       attachment = messageFields["attachments"];
 
-      let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
-      let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/;
-
       if (message) {
         res.writeHead(200);
         postMessage(message)
@@ -48,14 +45,16 @@ function respond(req, res) {
         res.writeHead(200);
         res.end();
       }
-
-
-
     }
   });
 }
 function postMessage(message) {
+
+  let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
+  let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/;
+
   let botResponse;
+
   if (botRegex.test(message)) {
     botResponse = cool();
   }
@@ -66,7 +65,6 @@ function postMessage(message) {
       console.log(caption);
     });
   }
-
 
   console.log('sending ' + botResponse + ' to ' + botID);
 
