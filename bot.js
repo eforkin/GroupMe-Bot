@@ -59,10 +59,16 @@ function postMessage(message, name, attachment) {
 
   let botResponse;
 
+  let shouldSendRequest = false;
+
   if (botRegex.test(message)) {
+    shouldSendRequest = true;
     botResponse = cool();
   }
   else if (mackRegex.test(message)) {
+
+    shouldSendRequest = true;
+
     const curDate = new Date();
     const theDate = new Date("12/9/2017");
     let totalDays = dateDiffInDays(theDate, curDate);
@@ -70,13 +76,15 @@ function postMessage(message, name, attachment) {
     botResponse = "It has been " + parseInt(totalDays) + " days since Chris had sex with Mackenzie.";
   }
 
-  console.log('sending ' + botResponse + ' to ' + botID);
+  if (shouldSendRequest) {
+    console.log('sending ' + botResponse + ' to ' + botID);
 
-  let url = 'https://api.groupme.com/v3/bots/post';
-  let package = {};
-  package.text = botResponse;
-  package.bot_id = botID;
-  request( { url:url, method:'POST', body: JSON.stringify(package) });
+    let url = 'https://api.groupme.com/v3/bots/post';
+    let package = {};
+    package.text = botResponse;
+    package.bot_id = botID;
+    request( { url:url, method:'POST', body: JSON.stringify(package) });
+  }
 
   if (cryptoRegex.test(message)) {
     request('https://api.cryptonator.com/api/ticker/ltc-usd', function(err, res, body) {
