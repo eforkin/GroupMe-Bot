@@ -143,10 +143,10 @@ function postMessage(message, name, attachment) {
       console.log(botResponse);
 
       let url = 'https://api.groupme.com/v3/bots/post';
-      let package = {};
-      package.text = botResponse;
-      package.bot_id = botID;
-      request( { url:url, method:'POST', body: JSON.stringify(package) });
+      let deepPackage = {};
+      deepPackage.text = botResponse;
+      deepPackage.bot_id = botID;
+      request( { url:url, method:'POST', body: JSON.stringify(deepPackage) });
 
     });
   }
