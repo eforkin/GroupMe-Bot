@@ -108,8 +108,11 @@ function postMessage(message, name, attachment) {
         console.error('request failed:', err);
         return;
       }
-      var response = JSON.parse(body);
+      let response = JSON.parse(body);
       console.log(response);
+      for (face in json.faces) {
+        console.log(face);
+      }
     });
   }
 }
