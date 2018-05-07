@@ -139,7 +139,8 @@ function postMessage(message, name, attachment) {
       console.log(response);
       console.log(response["output"]);
 
-      botResponse = "This is " + (response["output"]["nsfw_score"] * 100) + "% a nude."
+      botResponse = "This is " + (response["output"]["nsfw_score"] * 100) + "% a nude.";
+      console.log(botResponse);
 
       let url = 'https://api.groupme.com/v3/bots/post';
       let package = {};
