@@ -53,10 +53,9 @@ function postMessage(message, name, attachment) {
 
   let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
   let captionThisRegex = /[iI][nN][vV][eE][sS][tT][iI][gG][aA][tT][eE]/;
-  let nudeRegex = /[iI][sS] [tT][hH][iI][sS] [aA] [nN][uU][dD][eE]/
   let mackRegex = /[mM][aA][cC][kK][eE][nN][zZ][iI][eE]/;
-  let cryptoRegex = /[cC][rR][yY][pP][tT][oO]/
-  let exaggerateRegex = /[eE][xX][aA][gG][gG][eE][rR][aA][tT][eE]/
+  let cryptoRegex = /[cC][rR][yY][pP][tT][oO]/;
+  let exaggerateRegex = /[eE][xX][aA][gG][gG][eE][rR][aA][tT][eE]/;
 
   let botResponse;
 
@@ -128,34 +127,6 @@ function postMessage(message, name, attachment) {
         package.bot_id = botID;
         request( { url:url, method:'POST', body: JSON.stringify(package) });
       }
-    });
-  }
-  else if (nudeRegex.test(message) && attachment && attachment.length > 0) {
-
-
-    request.post({
-      url: 'https://api.deepai.org/api/nsfw-detector',
-      headers: {
-          'Api-Key': process.env.DEEP_AI_KEY
-      },
-      formData: {
-          'image': attachment[0].url,
-      }
-    }, function callback(err, httpResponse, body) {
-      if (err) {
-          console.error('request failed:', err);
-          return;
-      }
-      var response = JSON.parse(body);
-      console.log(response);
-
-      botResponse = "This is " + (response["output"]["nsfw_score"] * 100) + "% a nude.";
-
-      let url = 'https://api.groupme.com/v3/bots/post';
-      let package = {};
-      package.text = botResponse;
-      package.bot_id = botID;
-      request( { url:url, method:'POST', body: JSON.stringify(package) });
     });
   }
   else if (exaggerateRegex.test(message) && attachment && attachment.length > 0) {
