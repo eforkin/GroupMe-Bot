@@ -105,6 +105,7 @@ function postMessage(message, name, attachment) {
   }
   else if (nasaPicRegex.test(message)) {
     let searchURL = 'https://api.nasa.gov/planetary/apod?api_key=' + process.env.NASA_KEY;
+    console.log(searchURL);
     request(searchURL, function(err, res, body) {
       console.log(body);
       let json = JSON.parse(body);
