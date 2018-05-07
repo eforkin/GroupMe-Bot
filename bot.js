@@ -107,10 +107,10 @@ function postMessage(message, name, attachment) {
         return;
       }
       let response = JSON.parse(body);
-      console.log(response["output"]["faces"][0]);
-      console.log(response["output"]["faces"]["age"]);
-      for (face in response["output"]["faces"][0]) {
-        console.log(face);
+      // console.log(response["output"]["faces"][0]);
+      for (let i = 0; i < response["output"]["faces"].length; i++) {
+          console.log(response["output"]["faces"][i]);
+          console.log(response["output"]["faces"][i].gender);
       }
     });
   }
