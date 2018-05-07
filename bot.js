@@ -24,11 +24,13 @@ function respond(req, res) {
 
   form.on('end', function() {
 
-    if (messageFields["name"] != botName) {
+    if (messageFields["name"] != botName && messageFields["id"] != botID) {
 
       console.log(messageFields["name"]);
       console.log(messageFields["text"]);
-      console.log(messageFields["attachments"]);
+      console.log(messageFields["id"]);
+
+      console.log(botName);
 
       name = messageFields["name"];
       message = messageFields["text"];
@@ -63,7 +65,7 @@ function postMessage(message, name, attachment) {
     const theDate = new Date("12/9/2017");
     let totalDays = dateDiffInDays(theDate, curDate);
 
-    botResponse = "It has been " + parseInt(totalDays) + " days since Chris had sex with Mackenzie."
+    botResponse = "It has been " + parseInt(totalDays) + " days since Chris had sex with Mackenzie.";
   }
 
   console.log('sending ' + botResponse + ' to ' + botID);
