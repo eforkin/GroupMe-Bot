@@ -52,7 +52,7 @@ function respond(req, res) {
 function postMessage(message, name, attachment) {
 
   let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
-  let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/;
+  let captionThisRegex = /[iI][nN][vV][eE][sS][tT][iI][gG][aA][tT][eE]/;
   let mackRegex = /[mM][aA][cC][kK][eE][nN][zZ][iI][eE]/;
   let cryptoRegex = /[cC][rR][yY][pP][tT][oO]/
 
@@ -96,7 +96,7 @@ function postMessage(message, name, attachment) {
     console.log("KEY");
     console.log(process.env.DEEP_AI_KEY);
     request.post({
-      url: 'https://api.deepai.org/api/densecap',
+      url: 'https://api.deepai.org/api/demographic-recognition',
       headers: {
         'Api-Key': process.env.DEEP_AI_KEY
       },
