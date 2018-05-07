@@ -107,8 +107,9 @@ function postMessage(message, name, attachment) {
         return;
       }
       let response = JSON.parse(body);
-      console.log(response);
-      for (face in response["output"]["faces"]) {
+      console.log(response["output"]["faces"][0]);
+      console.log(response["output"]["faces"]["age"]);
+      for (face in response["output"]["faces"][0]) {
         console.log(face);
       }
     });
