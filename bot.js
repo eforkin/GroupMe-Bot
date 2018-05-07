@@ -107,10 +107,7 @@ function postMessage(message, name, attachment) {
     let searchURL = 'https://api.nasa.gov/planetary/apod?api_key=' + process.env.NASA_KEY;
     console.log(searchURL);
     request(searchURL, function(err, res, body) {
-      console.log(res);
-      console.log(body);
       let json = JSON.parse(body);
-      console.log(json);
       botResponse = json["url"];
 
       let url = 'https://api.groupme.com/v3/bots/post';
