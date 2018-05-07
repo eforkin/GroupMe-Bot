@@ -168,6 +168,7 @@ function postMessage(message, name, attachment) {
     }, function callback(err, httpResponse, body) {
       if (err) {
         console.error('request failed:', err);
+        console.log("httpResponse");
         return;
       }
       var response = JSON.parse(body);
