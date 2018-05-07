@@ -58,6 +58,7 @@ function postMessage(message, name, attachment) {
   let exaggerateRegex = /[eE][xX][aA][gG][gG][eE][rR][aA][tT][eE]/;
   let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/
   let nasaPicRegex = /[sS][pP][aA][cC][eE] [pP][iI][cC]/;
+  let carolynRegex = /[cC][aA][rR][oO][lL][yY][nN]/;
 
   let botResponse;
 
@@ -67,10 +68,17 @@ function postMessage(message, name, attachment) {
     shouldSendRequest = true;
     botResponse = cool();
   }
-  else if (mackRegex.test(message)) {
+  else if (carolynRegex.test(message)) {
 
     shouldSendRequest = true;
 
+    const curDate = new Date();
+    const theDate = new Date("8/31/1996");
+    let totalDays = dateDiffInDays(theDate, curDate);
+
+    botResponse = "It has been " + parseInt(totalDays) + " days that Chris has not had sex with Meghan Kurr.";
+  }
+  else if (mackRegex.test(message)) {
     const curDate = new Date();
     const theDate = new Date("12/9/2017");
     let totalDays = dateDiffInDays(theDate, curDate);
