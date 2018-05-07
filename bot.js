@@ -72,8 +72,9 @@ function postMessage(message, name, attachment) {
     botResponse = "It has been " + parseInt(totalDays) + " days since Chris had sex with Mackenzie.";
   }
   else if (cryptoRegex.test(message)) {
-    request('https://api.cryptonator.com/api/ticker/btc-usd', function(err, res, body) {
-      console.log(body);
+    request('https://api.cryptonator.com/api/ticker/ltc-usd', function(err, res, body) {
+      let json = JSON.parse(body);
+      botResponse = "Litecoin's price is currently at $" + json["price"] + ".";
     });
   }
 
@@ -83,6 +84,9 @@ function postMessage(message, name, attachment) {
   let package = {};
   package.text = botResponse;
   package.bot_id = botID;
+  while (!botResponse) {
+    continue;
+  }
   request( { url:url, method:'POST', body: JSON.stringify(package) });
 }
 
