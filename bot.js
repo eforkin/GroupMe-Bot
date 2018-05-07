@@ -176,7 +176,7 @@ function postMessage(message, name, attachment) {
       var response = JSON.parse(body);
       console.log(response);
 
-      botResponse = response["output"]["output_url"];
+      botResponse = response["output_url"];
 
       let url = 'https://api.groupme.com/v3/bots/post';
       let package = {};
