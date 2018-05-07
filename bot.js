@@ -85,8 +85,8 @@ function postMessage(message, name, attachment) {
       let json = JSON.parse(body);
       console.log(json);
       console.log(json["ticker"]);
-      console.log(json.ticker);
-      botResponse = "Litecoin's price is currently at $" + json["ticker"]["price"] + ".";
+      let curPrice = Number((parseFloat(json["ticker"]["price"])).toFixed(2));
+      botResponse = "Litecoin's price is currently at $" + curPrice + ".";
 
       let url = 'https://api.groupme.com/v3/bots/post';
       let package = {};
