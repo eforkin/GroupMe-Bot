@@ -109,7 +109,7 @@ function postMessage(message, name, attachment) {
       let response = JSON.parse(body);
       for (let i = 0; i < response["output"]["faces"].length; i++) {
           let person = response["output"]["faces"][i];
-          botResponse = "Person #" + parseInt(i + 1) + " is a " + person.cultural_appearance " " +
+          botResponse = "Person #" + parseInt(i + 1) + " is a " + person.cultural_appearance + " " +
           person.gender + " between the ages of " + person.age_range[0] + " and " + person.age_range[1] + ".";
 
           let url = 'https://api.groupme.com/v3/bots/post';
