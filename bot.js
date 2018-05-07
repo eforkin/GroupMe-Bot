@@ -97,6 +97,8 @@ function postMessage(message, name, attachment) {
     });
   }
   else if (captionThisRegex.test(message) && attachment) {
+    console.log("KEY");
+    console.log(DEEP_AI_KEY);
     request.post({
       url: 'https://api.deepai.org/api/densecap',
       headers: {
