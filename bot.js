@@ -74,6 +74,9 @@ function postMessage(message, name, attachment) {
   else if (cryptoRegex.test(message)) {
     request('https://api.cryptonator.com/api/ticker/ltc-usd', function(err, res, body) {
       let json = JSON.parse(body);
+      console.log(json);
+      console.log(json["price"]);
+      console.log(json.price);
       botResponse = "Litecoin's price is currently at $" + json["price"] + ".";
     });
   }
