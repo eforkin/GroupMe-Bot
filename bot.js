@@ -137,7 +137,7 @@ function postMessage(message, name, attachment) {
       }
       let response = JSON.parse(body);
       console.log(response);
-      console.log(output)
+      console.log(response["output"]);
 
       botResponse = "This is " + (response["output"]["nsfw_score"] * 100) + "% a nude."
 
