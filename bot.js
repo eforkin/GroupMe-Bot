@@ -57,7 +57,7 @@ function postMessage(message, name, attachment) {
   let cryptoRegex = /[cC][rR][yY][pP][tT][oO]/;
   let exaggerateRegex = /[eE][xX][aA][gG][gG][eE][rR][aA][tT][eE]/;
   let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/
-  let nasaPicRegex = /[sS][pp][aA][cC][eE] [pP][iI][cC]/;
+  let nasaPicRegex = /[sS][pP][aA][cC][eE] [pP][iI][cC]/;
 
   let botResponse;
 
@@ -106,6 +106,7 @@ function postMessage(message, name, attachment) {
   else if (nasaPicRegex.test(message)) {
     let searchURL = 'https://api.nasa.gov/planetary/apod?api_key=' + process.env.NASA_KEY;
     request(searchURL, function(err, res, body) {
+      console.log(body);
       let json = JSON.parse(body);
       console.log(json);
       botResponse = json["url"];
