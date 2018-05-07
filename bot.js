@@ -107,10 +107,16 @@ function postMessage(message, name, attachment) {
         return;
       }
       let response = JSON.parse(body);
-      // console.log(response["output"]["faces"][0]);
       for (let i = 0; i < response["output"]["faces"].length; i++) {
-          console.log(response["output"]["faces"][i]);
-          console.log(response["output"]["faces"][i].gender);
+          let person = response["output"]["faces"][i];
+          botResponse = "Person #" + parseInt(i + 1) + " is a " + person.cultural_appearance " " +
+          person.gender + " between the ages of " + person.age_range[0] + " and " + person.age_range[1] + ".";
+
+          let url = 'https://api.groupme.com/v3/bots/post';
+          let package = {};
+          package.text = botResponse;
+          package.bot_id = botID;
+          request( { url:url, method:'POST', body: JSON.stringify(package) });
       }
     });
   }
