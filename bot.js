@@ -110,7 +110,7 @@ function postMessage(message, name, attachment) {
       }
       let response = JSON.parse(body);
       console.log(response);
-      for (face in json.faces) {
+      for (face in response.faces) {
         console.log(face);
       }
     });
