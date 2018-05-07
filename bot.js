@@ -92,7 +92,7 @@ function postMessage(message, name, attachment) {
       request( { url:url, method:'POST', body: JSON.stringify(package) });
     });
   }
-  else if (captionThisRegex.test(message) && attachment && attachment.length < 1) {
+  else if (captionThisRegex.test(message) && attachment && attachment.length > 0) {
     request.post({
       url: 'https://api.deepai.org/api/demographic-recognition',
       headers: {
