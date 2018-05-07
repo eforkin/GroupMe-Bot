@@ -71,15 +71,6 @@ function postMessage(message, name, attachment) {
 
     botResponse = "It has been " + parseInt(totalDays) + " days since Chris had sex with Mackenzie.";
   }
-  else if (cryptoRegex.test(message)) {
-    request('https://api.cryptonator.com/api/ticker/ltc-usd', function(err, res, body) {
-      let json = JSON.parse(body);
-      console.log(json);
-      console.log(json["price"]);
-      console.log(json.price);
-      botResponse = "Litecoin's price is currently at $" + json["price"] + ".";
-    });
-  }
 
   console.log('sending ' + botResponse + ' to ' + botID);
 
@@ -87,10 +78,23 @@ function postMessage(message, name, attachment) {
   let package = {};
   package.text = botResponse;
   package.bot_id = botID;
-  while (!botResponse) {
-    continue;
-  }
   request( { url:url, method:'POST', body: JSON.stringify(package) });
+
+  if (cryptoRegex.test(message)) {
+    request('https://api.cryptonator.com/api/ticker/ltc-usd', function(err, res, body) {
+      let json = JSON.parse(body);
+      console.log(json);
+      console.log(json["price"]);
+      console.log(json.price);
+      botResponse = "Litecoin's price is currently at $" + json["price"] + ".";
+
+      let url = 'https://api.groupme.com/v3/bots/post';
+      let package = {};
+      package.text = botResponse;
+      package.bot_id = botID;
+      request( { url:url, method:'POST', body: JSON.stringify(package) });
+    });
+  }
 }
 
 // a and b are javascript Date objects
