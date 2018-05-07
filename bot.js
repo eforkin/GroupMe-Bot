@@ -56,6 +56,7 @@ function postMessage(message, name, attachment) {
   let nudeRegex = /[iI][sS] [tT][hH][iI][sS] [aA] [nN][uU][dD][eE]/
   let mackRegex = /[mM][aA][cC][kK][eE][nN][zZ][iI][eE]/;
   let cryptoRegex = /[cC][rR][yY][pP][tT][oO]/
+  let exaggerateRegex = /[eE][xX][aA][gG][gG][eE][rR][aA][tT][eE]/
 
   let botResponse;
 
@@ -117,15 +118,15 @@ function postMessage(message, name, attachment) {
       }
       let response = JSON.parse(body);
       for (let i = 0; i < response["output"]["faces"].length; i++) {
-          let person = response["output"]["faces"][i];
-          botResponse = "Person #" + parseInt(i + 1) + " is a " + person.cultural_appearance + " " +
-          person.gender + " between the ages of " + person.age_range[0] + " and " + person.age_range[1] + ".";
+        let person = response["output"]["faces"][i];
+        botResponse = "Person #" + parseInt(i + 1) + " is a " + person.cultural_appearance + " " +
+        person.gender + " between the ages of " + person.age_range[0] + " and " + person.age_range[1] + ".";
 
-          let url = 'https://api.groupme.com/v3/bots/post';
-          let package = {};
-          package.text = botResponse;
-          package.bot_id = botID;
-          request( { url:url, method:'POST', body: JSON.stringify(package) });
+        let url = 'https://api.groupme.com/v3/bots/post';
+        let package = {};
+        package.text = botResponse;
+        package.bot_id = botID;
+        request( { url:url, method:'POST', body: JSON.stringify(package) });
       }
     });
   }
@@ -156,6 +157,32 @@ function postMessage(message, name, attachment) {
       deepPackage.bot_id = botID;
       request( { url:url, method:'POST', body: JSON.stringify(deepPackage) });
 
+    });
+  }
+  else if (exaggerateRegex.test(message) && attachment && attachment.length > 0) {
+    request.post({
+      url: 'https://api.deepai.org/api/deepdream',
+      headers: {
+        'Api-Key':  process.env.DEEP_AI_KEY
+      },
+      formData: {
+        'content': attachment[0].url
+      }
+    }, function callback(err, httpResponse, body) {
+      if (err) {
+        console.error('request failed:', err);
+        return;
+      }
+      var response = JSON.parse(body);
+      console.log(response);
+
+      botResponse = response["output"]["output_url"];
+
+      let url = 'https://api.groupme.com/v3/bots/post';
+      let package = {};
+      package.text = botResponse;
+      package.bot_id = botID;
+      request( { url:url, method:'POST', body: JSON.stringify(package) });
     });
   }
 }
