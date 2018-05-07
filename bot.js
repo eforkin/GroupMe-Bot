@@ -158,7 +158,7 @@ function postMessage(message, name, attachment) {
   }
   else if (captionThisRegex.test(message) && attachment && attachment.length > 0) {
     request.post({
-      url: 'https://api.deepai.org/api/neuraltalk',
+      url: 'https://api.deepai.org/api/densecap',
       headers: {
         'Api-Key':  process.env.DEEP_AI_KEY
       },
@@ -168,19 +168,21 @@ function postMessage(message, name, attachment) {
     }, function callback(err, httpResponse, body) {
       if (err) {
         console.error('request failed:', err);
-        console.log("httpResponse");
         return;
       }
       var response = JSON.parse(body);
       console.log(response);
 
-      botResponse = response["output"];
+      for (let i = 0; i < response["output"].length; i++) {
+        botResponse = response["output"][i]["caption"];
 
-      let url = 'https://api.groupme.com/v3/bots/post';
-      let package = {};
-      package.text = botResponse;
-      package.bot_id = botID;
-      request( { url:url, method:'POST', body: JSON.stringify(package) });
+        let url = 'https://api.groupme.com/v3/bots/post';
+        let package = {};
+        package.text = botResponse;
+        package.bot_id = botID;
+        request( { url:url, method:'POST', body: JSON.stringify(package) });
+      }
+
     });
   }
 }
