@@ -93,8 +93,6 @@ function postMessage(message, name, attachment) {
     });
   }
   else if (captionThisRegex.test(message) && attachment) {
-    console.log("KEY");
-    console.log(process.env.DEEP_AI_KEY);
     request.post({
       url: 'https://api.deepai.org/api/demographic-recognition',
       headers: {
@@ -110,7 +108,7 @@ function postMessage(message, name, attachment) {
       }
       let response = JSON.parse(body);
       console.log(response);
-      for (face in response.faces) {
+      for (face in response["output"]["faces"]) {
         console.log(face);
       }
     });
