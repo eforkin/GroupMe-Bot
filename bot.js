@@ -57,6 +57,7 @@ function postMessage(message, name, attachment) {
   let cryptoRegex = /[cC][rR][yY][pP][tT][oO]/;
   let exaggerateRegex = /[eE][xX][aA][gG][gG][eE][rR][aA][tT][eE]/;
   let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/
+  let nasaPicRegex = /[sS][pp][aA][cC][eE] [pP][iI][cC]/;
 
   let botResponse;
 
@@ -94,6 +95,20 @@ function postMessage(message, name, attachment) {
       console.log(json["ticker"]);
       let curPrice = Number((parseFloat(json["ticker"]["price"])).toFixed(2));
       botResponse = "Litecoin's price is currently at $" + curPrice + ".";
+
+      let url = 'https://api.groupme.com/v3/bots/post';
+      let package = {};
+      package.text = botResponse;
+      package.bot_id = botID;
+      request( { url:url, method:'POST', body: JSON.stringify(package) });
+    });
+  }
+  else if (nasaPicRegex.test(message)) {
+    let searchURL = 'https://api.nasa.gov/planetary/apod?api_key=' + process.env.NASA_KEY;
+    request(searchURL, function(err, res, body) {
+      let json = JSON.parse(body);
+      console.log(json);
+      botResponse = json["url"];
 
       let url = 'https://api.groupme.com/v3/bots/post';
       let package = {};
@@ -154,35 +169,6 @@ function postMessage(message, name, attachment) {
       package.text = botResponse;
       package.bot_id = botID;
       request( { url:url, method:'POST', body: JSON.stringify(package) });
-    });
-  }
-  else if (captionThisRegex.test(message) && attachment && attachment.length > 0) {
-    request.post({
-      url: 'https://api.deepai.org/api/densecap',
-      headers: {
-        'Api-Key':  process.env.DEEP_AI_KEY
-      },
-      formData: {
-        'content': attachment[0].url
-      }
-    }, function callback(err, httpResponse, body) {
-      if (err) {
-        console.error('request failed:', err);
-        return;
-      }
-      var response = JSON.parse(body);
-      console.log(response);
-
-      for (let i = 0; i < response["output"].length; i++) {
-        botResponse = response["output"][i]["caption"];
-
-        let url = 'https://api.groupme.com/v3/bots/post';
-        let package = {};
-        package.text = botResponse;
-        package.bot_id = botID;
-        request( { url:url, method:'POST', body: JSON.stringify(package) });
-      }
-
     });
   }
 }
