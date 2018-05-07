@@ -76,8 +76,8 @@ function postMessage(message, name, attachment) {
     botResponse = "It has been " + parseInt(totalDays) + " days since Chris had sex with Mackenzie.";
   }
   else if (cryptoRegex.test(message)) {
-    channel.watch(function (data) {
-      console.log(data); // live data streams here!
+    request('http://stackabuse.com', function(err, res, body) {
+      console.log(body);
     });
   }
 
