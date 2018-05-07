@@ -3,10 +3,17 @@ const events = require('events');
 const util = require('util');
 const cool = require('cool-ascii-faces');
 const formidable = require('formidable');
+const socketcluster = require('socketcluster-client');
+
+// subscribe to TICKER channel
+var channel = SCsocket.subscribe("TICKER");
 
 let botID = process.env.BOT_ID;
 let botName = "TestBot";
 let _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+let client_id = process.env.SPOTIFY_CLIENT_ID;
+let client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 
 function respond(req, res) {
   let name = ""
@@ -54,6 +61,7 @@ function postMessage(message, name, attachment) {
   let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
   let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/;
   let mackRegex = /[mM][aA][cC][kK][eE][nN][zZ][iI][eE]/;
+  let cryptoRegex = /[cC][rR][yY][pP][tT][oO]/
 
   let botResponse;
 
@@ -66,6 +74,11 @@ function postMessage(message, name, attachment) {
     let totalDays = dateDiffInDays(theDate, curDate);
 
     botResponse = "It has been " + parseInt(totalDays) + " days since Chris had sex with Mackenzie.";
+  }
+  else if (cryptoRegex.test(message)) {
+    channel.watch(function (data) {
+      console.log(data); // live data streams here!
+    });
   }
 
   console.log('sending ' + botResponse + ' to ' + botID);
