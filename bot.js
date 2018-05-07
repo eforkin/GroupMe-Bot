@@ -8,10 +8,6 @@ let botID = process.env.BOT_ID;
 let botName = "TestBot";
 let _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-let client_id = process.env.SPOTIFY_CLIENT_ID;
-let client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-let DEEP_AI_KEY = process.env.DEEP_AI_KEY;
-
 function respond(req, res) {
   let name = ""
   let message = ""
@@ -98,11 +94,11 @@ function postMessage(message, name, attachment) {
   }
   else if (captionThisRegex.test(message) && attachment) {
     console.log("KEY");
-    console.log(DEEP_AI_KEY);
+    console.log(process.env.DEEP_AI_KEY);
     request.post({
       url: 'https://api.deepai.org/api/densecap',
       headers: {
-        'Api-Key': DEEP_AI_KEY
+        'Api-Key': process.env.DEEP_AI_KEY
       },
       formData: {
         'image': attachment[0].url
