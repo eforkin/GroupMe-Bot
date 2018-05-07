@@ -131,32 +131,31 @@ function postMessage(message, name, attachment) {
     });
   }
   else if (nudeRegex.test(message) && attachment && attachment.length > 0) {
+
+
     request.post({
       url: 'https://api.deepai.org/api/nsfw-detector',
       headers: {
-        'Api-Key': process.env.DEEP_AI_KEY
+          'Api-Key': process.env.DEEP_AI_KEY
       },
       formData: {
-        'image': attachment[0].url
+          'image': attachment[0].url,
       }
     }, function callback(err, httpResponse, body) {
       if (err) {
-        console.error('request failed:', err);
-        return;
+          console.error('request failed:', err);
+          return;
       }
-      let response = JSON.parse(body);
+      var response = JSON.parse(body);
       console.log(response);
-      console.log(response["output"]);
 
       botResponse = "This is " + (response["output"]["nsfw_score"] * 100) + "% a nude.";
-      console.log(botResponse);
 
       let url = 'https://api.groupme.com/v3/bots/post';
-      let deepPackage = {};
-      deepPackage.text = botResponse;
-      deepPackage.bot_id = botID;
-      request( { url:url, method:'POST', body: JSON.stringify(deepPackage) });
-
+      let package = {};
+      package.text = botResponse;
+      package.bot_id = botID;
+      request( { url:url, method:'POST', body: JSON.stringify(package) });
     });
   }
   else if (exaggerateRegex.test(message) && attachment && attachment.length > 0) {
