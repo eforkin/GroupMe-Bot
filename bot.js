@@ -51,7 +51,7 @@ function respond(req, res) {
 }
 function postMessage(message, name, attachment) {
 
-  let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
+  let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[cC][oO][oO][lL] [gG][iI][rR][lL]/;
   let investigateRegex = /[iI][nN][vV][eE][sS][tT][iI][gG][aA][tT][eE]/;
   let mackRegex = /[mM][aA][cC][kK][eE][nN][zZ][iI][eE]/;
   let cryptoRegex = /[cC][rR][yY][pP][tT][oO]/;
