@@ -52,10 +52,11 @@ function respond(req, res) {
 function postMessage(message, name, attachment) {
 
   let botRegex = /[cC][oO][oO][lL] [gG][uU][yY]|[gG][iI][rR][lL]/;
-  let captionThisRegex = /[iI][nN][vV][eE][sS][tT][iI][gG][aA][tT][eE]/;
+  let investigateRegex = /[iI][nN][vV][eE][sS][tT][iI][gG][aA][tT][eE]/;
   let mackRegex = /[mM][aA][cC][kK][eE][nN][zZ][iI][eE]/;
   let cryptoRegex = /[cC][rR][yY][pP][tT][oO]/;
   let exaggerateRegex = /[eE][xX][aA][gG][gG][eE][rR][aA][tT][eE]/;
+  let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/
 
   let botResponse;
 
@@ -101,7 +102,7 @@ function postMessage(message, name, attachment) {
       request( { url:url, method:'POST', body: JSON.stringify(package) });
     });
   }
-  else if (captionThisRegex.test(message) && attachment && attachment.length > 0) {
+  else if (investigateRegex.test(message) && attachment && attachment.length > 0) {
     request.post({
       url: 'https://api.deepai.org/api/demographic-recognition',
       headers: {
@@ -147,6 +148,32 @@ function postMessage(message, name, attachment) {
       console.log(response);
 
       botResponse = response["output_url"];
+
+      let url = 'https://api.groupme.com/v3/bots/post';
+      let package = {};
+      package.text = botResponse;
+      package.bot_id = botID;
+      request( { url:url, method:'POST', body: JSON.stringify(package) });
+    });
+  }
+  else if (captionThisRegex.test(message) && attachment && attachment.length > 0) {
+    request.post({
+      url: 'https://api.deepai.org/api/neuraltalk',
+      headers: {
+        'Api-Key':  process.env.DEEP_AI_KEY
+      },
+      formData: {
+        'content': attachment[0].url
+      }
+    }, function callback(err, httpResponse, body) {
+      if (err) {
+        console.error('request failed:', err);
+        return;
+      }
+      var response = JSON.parse(body);
+      console.log(response);
+
+      botResponse = response["output"];
 
       let url = 'https://api.groupme.com/v3/bots/post';
       let package = {};
