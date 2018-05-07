@@ -10,6 +10,7 @@ let _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 let client_id = process.env.SPOTIFY_CLIENT_ID;
 let client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+let DEEP_AI_KEY = process.env.DEEP_AI_KEY;
 
 function respond(req, res) {
   let name = ""
@@ -93,6 +94,24 @@ function postMessage(message, name, attachment) {
       package.text = botResponse;
       package.bot_id = botID;
       request( { url:url, method:'POST', body: JSON.stringify(package) });
+    });
+  }
+  else if (captionThisRegex.test(message) && attachment) {
+    request.post({
+      url: 'https://api.deepai.org/api/densecap',
+      headers: {
+        'Api-Key': DEEP_AI_KEY
+      },
+      formData: {
+        'image': attachment[0].url
+      }
+    }, function callback(err, httpResponse, body) {
+      if (err) {
+        console.error('request failed:', err);
+        return;
+      }
+      var response = JSON.parse(body);
+      console.log(response);
     });
   }
 }
