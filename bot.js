@@ -84,9 +84,9 @@ function postMessage(message, name, attachment) {
     request('https://api.cryptonator.com/api/ticker/ltc-usd', function(err, res, body) {
       let json = JSON.parse(body);
       console.log(json);
-      console.log(json["price"]);
-      console.log(json.price);
-      botResponse = "Litecoin's price is currently at $" + json["price"] + ".";
+      console.log(json["ticker"]);
+      console.log(json.ticker);
+      botResponse = "Litecoin's price is currently at $" + json["ticker"]["price"] + ".";
 
       let url = 'https://api.groupme.com/v3/bots/post';
       let package = {};
