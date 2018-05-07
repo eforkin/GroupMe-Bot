@@ -76,7 +76,7 @@ function postMessage(message, name, attachment) {
     botResponse = "It has been " + parseInt(totalDays) + " days since Chris had sex with Mackenzie.";
   }
   else if (cryptoRegex.test(message)) {
-    request('http://stackabuse.com', function(err, res, body) {
+    request('https://api.cryptonator.com/api/ticker/btc-usd', function(err, res, body) {
       console.log(body);
     });
   }
