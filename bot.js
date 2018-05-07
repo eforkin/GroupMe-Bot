@@ -76,7 +76,7 @@ function postMessage(message, name, attachment) {
     const theDate = new Date("8/31/1996");
     let totalDays = dateDiffInDays(theDate, curDate);
 
-    botResponse = "It has been " + parseInt(totalDays) + " days that Chris has not had sex with Meghan Kurr.";
+    botResponse = "It has been " + parseInt(totalDays) + " days that Chris has not had sex with Meghan Kuhr.";
   }
   else if (mackRegex.test(message)) {
 
