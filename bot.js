@@ -3,10 +3,6 @@ const events = require('events');
 const util = require('util');
 const cool = require('cool-ascii-faces');
 const formidable = require('formidable');
-const socketcluster = require('socketcluster-client');
-
-// subscribe to TICKER channel
-var channel = SCsocket.subscribe("TICKER");
 
 let botID = process.env.BOT_ID;
 let botName = "TestBot";
