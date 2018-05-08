@@ -153,8 +153,34 @@ function postMessage(message, name, attachment) {
         request( { url:url, method:'POST', body: JSON.stringify(package) });
       });
     }
+    else if (whereRegex.test(message) && attachment && attachment.length > 0) {
+        console.log(attachment)
+      request.post({
+        url: 'https://api.deepai.org/api/places',
+        headers: {
+          'Api-Key':  process.env.DEEP_AI_KEY
+        },
+        formData: {
+          'content': attachment[0].url
+        }
+      }, function callback(err, httpResponse, body) {
+        if (err) {
+          console.error('request failed:', err);
+          return;
+        }
+        var response = JSON.parse(body);
+        console.log(response);
+
+        botResponse = response["output_url"];
+
+        let url = 'https://api.groupme.com/v3/bots/post';
+        let package = {};
+        package.text = botResponse;
+        package.bot_id = botID;
+        request( { url:url, method:'POST', body: JSON.stringify(package) });
+      });
+    }
     else if (combineRegex.test(message) && attachment && attachment.length == 2) {
-        console.log(attachment);
       request.post({
         url: 'https://api.deepai.org/api/CNNMRF',
         headers: {
