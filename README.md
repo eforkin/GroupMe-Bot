@@ -44,19 +44,17 @@ $ git push heroku master
 3. Go back to heroku and find the app you just created. On the app page, click settings in the top navigation.
 On your app's setting page, find the Config Vars section and click the Reveal Config Vars button. Then click edit.
 
-a. Fill out the form to add an environment variable to your app:
+Fill out the form to add an environment variable to your app:
   * In the "key" field type: BOT_ID
   * In the "value" field paste your Bot ID
   * Click the save button
   
-b. Do this again for the Bot Name
+Do this again for the Bot Name
   * In the "key" field type: BOT_NAME
   * In the "value" field paste your Bot Name
   * Click the save button
 
-![Add the Bot ID environment variable](http://i.groupme.com/784x148.png.5790498a7acd46b289aca2be43e9c84e)
-
-## Now go test your bot!
+## You should be all set!
 
 Go to GroupMe and type "cool guy" or "cool girl" in the group where your bot lives. It should text back a cool face!
 
