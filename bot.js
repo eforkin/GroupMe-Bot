@@ -6,7 +6,6 @@ const formidable = require('formidable');
 
 let botID = process.env.BOT_ID;
 let botName = "Snickers";
-let _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 function respond(req, res) {
   let name = ""
@@ -25,6 +24,8 @@ function respond(req, res) {
   form.on('end', function() {
 
     if (messageFields["name"] != botName && messageFields["id"] != botID) {
+
+      console.log(messageFields);
 
       console.log(messageFields["name"]);
       console.log(messageFields["text"]);
@@ -60,14 +61,9 @@ function postMessage(message, name, attachment) {
 
   let botResponse;
 
-  let shouldSendRequest = false;
-
   if (botRegex.test(message)) {
-    shouldSendRequest = true;
     botResponse = cool();
-  }
 
-  if (shouldSendRequest) {
     console.log('sending ' + botResponse + ' to ' + botID);
 
     let url = 'https://api.groupme.com/v3/bots/post';
@@ -160,15 +156,6 @@ function postMessage(message, name, attachment) {
       request( { url:url, method:'POST', body: JSON.stringify(package) });
     });
   }
-}
-
-// a and b are javascript Date objects
-function dateDiffInDays(a, b) {
-  // Discard the time and time-zone information.
-  let utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-  let utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
 
 exports.respond = respond;
