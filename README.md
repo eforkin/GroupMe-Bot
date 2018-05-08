@@ -75,8 +75,5 @@ Do this again for the Bot Name
 
 ## Now go test your bot!
 
-Go to GroupMe and type "cool guy" or "cool girl" in the group where your bot lives to see it in action.
-
-![Test your Bot](http://i.groupme.com/821x587.png.7bcf55bed1c64acab83fa2c2ad0b0862)
-
+Go to GroupMe and type "cool guy" or "cool girl" in the group where your bot lives. It should text back a cool face!
 
