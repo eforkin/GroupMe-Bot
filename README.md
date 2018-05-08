@@ -37,12 +37,9 @@ $ git push heroku master
   * (Optional) Give your bot an avatar by providing a url to an image
   * Click submit
 
-## Find your Bot ID:<a name="get-bot-id"></a>
+## Add Bot ID and Name to Heroku App
 
-Go here to view all of your bots:
-https://dev.groupme.com/bots
-
-Click on the one you just created.
+1. Go to https://dev.groupme.com/bots and click on the one you just created.
 
 ![Select your new bot](http://i.groupme.com/871x333.png.5a33ef2b6ab74ea59d5aaa5569aaaf23)
 
@@ -65,9 +62,13 @@ Then click edit:
 ![Edit your environment variables](http://i.groupme.com/796x212.png.b8979454fc4742c7bae688ac67262755)
 
 Fill out the form to add an environment variable to your app:
-
   * In the "key" field type: BOT_ID
-  * In the "value" field paste your Bot ID that you copied in the previous steps
+  * In the "value" field paste your Bot ID
+  * Click the save button
+  
+Do this again for the Bot_Name
+  * In the "key" field type: BOT_NAME
+  * In the "value" field paste your Bot Name
   * Click the save button
 
 ![Add the Bot ID environment variable](http://i.groupme.com/784x148.png.5790498a7acd46b289aca2be43e9c84e)
