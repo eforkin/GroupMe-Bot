@@ -19,30 +19,16 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 1. Go to https://www.heroku.com and log in (create an account if necessary).
 2. Go to https://dashboard.heroku.com/new-app and create a new app with a name of your choice.
-3. Navigate to 
+3. Under GroupMe-Bot directory, run the following commands. Every time you update the bot, you will push to heroku master.
 
 ```
 $ heroku create
 git add.
 git commit -m "first commit"
 $ git push heroku master
-$ heroku open
 ```
 
-Be sure to log into heroku, using your heroku credentials, then click the link below.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-You should be taken to a page that looks like this:
-
-![Deploy to Heroku](http://i.groupme.com/837x662.png.36c63698644a4f61a9ff3d5af91caa5e)
-
-Optionally, you can give your app a name, or instead leave
-it blank and let Heroku name it for you (you can change it later).
-
-![Success](https://i.groupme.com/959x932.png.85e7959a8a9a41c6b20f5f6b50aceecb)
-
-## Next, create a GroupMe Bot:
+## Create GroupMe Bot:
 
 Go to:
 https://dev.groupme.com/session/new
