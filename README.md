@@ -30,10 +30,7 @@ $ git push heroku master
 
 ## Create GroupMe Bot:
 
-Go to:
-https://dev.groupme.com/session/new
-
-Use your GroupMe credentials to log into the developer site.
+1. Go to https://dev.groupme.com/session/new and log in (create an account if necessary. The login credentials are the same as your regular GroupMe account.
 
 ![Log into dev.groupme.com](https://i.groupme.com/640x292.png.38c9e590383149c1a01424fc61cdce4e)
 
