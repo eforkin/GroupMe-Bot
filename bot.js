@@ -5,7 +5,7 @@ const cool = require('cool-ascii-faces');
 const formidable = require('formidable');
 
 let botID = process.env.BOT_ID;
-let botName = "Snickers";
+let botName = process.env.BOT_NAME;
 
 function respond(req, res) {
   let name = ""
