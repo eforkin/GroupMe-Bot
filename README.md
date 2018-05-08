@@ -37,36 +37,19 @@ $ git push heroku master
   * (Optional) Give your bot an avatar by providing a url to an image
   * Click submit
 
-## Add Bot ID and Name to Heroku App
+## Add Bot ID and Bot Name to Heroku App
 
 1. Go to https://dev.groupme.com/bots and click on the one you just created.
+2. On your Bot's page, copy the Bot ID
+3. Go back to heroku and find the app you just created. On the app page, click settings in the top navigation.
+On your app's setting page, find the Config Vars section and click the Reveal Config Vars button. Then click edit.
 
-![Select your new bot](http://i.groupme.com/871x333.png.5a33ef2b6ab74ea59d5aaa5569aaaf23)
-
-On your Bot's page, copy the Bot ID
-
-![Copy your Bot ID](http://i.groupme.com/615x295.png.3256190e86ed4cd7ae6cf09899c1f9a8)
-
-## Add your Bot ID to your Heroku app:
-
-Go back to heroku and find the app you just created. On the app page, click settings in the top navigation:
-
-![Go to your app's settings](http://i.groupme.com/722x127.png.27c0a2e83c524064bd41bb66df76d14c)
-
-On your app's setting page, find the Config Vars section and click the Reveal Config Vars button:
-
-![Reveal your environment variables](http://i.groupme.com/606x181.png.94d5157963bc419886e98e038e3195c3)
-
-Then click edit:
-
-![Edit your environment variables](http://i.groupme.com/796x212.png.b8979454fc4742c7bae688ac67262755)
-
-Fill out the form to add an environment variable to your app:
+a. Fill out the form to add an environment variable to your app:
   * In the "key" field type: BOT_ID
   * In the "value" field paste your Bot ID
   * Click the save button
   
-Do this again for the Bot Name
+b. Do this again for the Bot Name
   * In the "key" field type: BOT_NAME
   * In the "value" field paste your Bot Name
   * Click the save button
