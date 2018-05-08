@@ -54,13 +54,7 @@ On your Bot's page, copy the Bot ID
 
 ## Add your Bot ID to your Heroku app:
 
-Go here to see all of your Heroku apps and select the one you just created before:
-
-https://dashboard-next.heroku.com/apps
-
-![Select your heroku app](http://i.groupme.com/920x722.png.46154d6b95f249539c594b129ddb7732)
-
-On your app page, click settings in the top navigation:
+Go back to heroku and find the app you just created. On the app page, click settings in the top navigation:
 
 ![Go to your app's settings](http://i.groupme.com/722x127.png.27c0a2e83c524064bd41bb66df76d14c)
 
