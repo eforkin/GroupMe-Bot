@@ -1,4 +1,4 @@
-# GroupMe Bot Setup
+# GroupMe Bot
 
 ## Run Locally
 
@@ -49,7 +49,7 @@ Fill out the form to add an environment variable to your app:
   * In the "value" field paste your Bot ID
   * Click the save button
   
-Do this again for the Bot Name
+Do this again for the Bot Name:
   * In the "key" field type: BOT_NAME
   * In the "value" field paste your Bot Name
   * Click the save button
