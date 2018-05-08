@@ -154,12 +154,13 @@ function postMessage(message, name, attachment) {
     }
     else if (whereRegex.test(message) && attachment && attachment.length > 0) {
       request.post({
-        url: 'https://api.deepai.org/api/colorizer',
+        url: 'https://api.deepai.org/api/CNNMRF',
         headers: {
           'Api-Key':  process.env.DEEP_AI_KEY
         },
         formData: {
-          'content': attachment[0].url
+            'content_image': attachment[0].url,
+            'style_image': attachment[1].url,
         }
       }, function callback(err, httpResponse, body) {
         if (err) {
@@ -169,7 +170,7 @@ function postMessage(message, name, attachment) {
         var response = JSON.parse(body);
         console.log(response);
 
-        botResponse = response["output"]["name"];
+        botResponse = response["output_url"];
 
         let url = 'https://api.groupme.com/v3/bots/post';
         let package = {};
