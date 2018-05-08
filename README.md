@@ -1,8 +1,8 @@
-# GroupMe-Bot Tutorial
+# GroupMe Bot Setup
 
 This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-
 
-## Running Locally
+## Run Locally
 
 Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
 
@@ -15,7 +15,7 @@ $ npm start
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
-## Deploying to Heroku
+## Deploy to Heroku
 
 1. Go to https://www.heroku.com and log in (create an account if necessary).
 2. Go to https://dashboard.heroku.com/new-app and create a new app with a name of your choice.
@@ -28,21 +28,13 @@ git commit -m "first commit"
 $ git push heroku master
 ```
 
-## Create GroupMe Bot:
+## Create GroupMe Bot
 
 1. Go to https://dev.groupme.com/session/new and log in (create an account if necessary. The login credentials are the same as your regular GroupMe account.
-
-![Log into dev.groupme.com](https://i.groupme.com/640x292.png.38c9e590383149c1a01424fc61cdce4e)
-
-Once you have successfully logged in, go to https://dev.groupme.com/bots/new
-
-![Create your new bot](http://i.groupme.com/567x373.png.242d18352d7742858cf9a263f597c5d9)
-
-Fill out the form to create your new bot:
-
+2. Go to https://dev.groupme.com/bots/new
   * Select the group where you want the bot to live
   * Give your bot a name
-  * Paste in the url to your newly deply heroku app
+  * Paste in the url to your newly deployed heroku app
     * `http://your-app-name-here.herokuapp.com/`
   * (Optional) Give your bot an avatar by providing a url to an image
   * Click submit
