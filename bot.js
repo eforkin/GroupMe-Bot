@@ -25,13 +25,8 @@ function respond(req, res) {
 
     if (messageFields["name"] != botName) {
 
-      console.log(messageFields);
-
       console.log(messageFields["name"]);
       console.log(messageFields["text"]);
-      console.log(messageFields["id"]);
-
-      console.log(botName);
 
       name = messageFields["name"];
       message = messageFields["text"];
@@ -73,89 +68,89 @@ function postMessage(message, name, attachment) {
     request( { url:url, method:'POST', body: JSON.stringify(package) });
   }
 
-  if (cryptoRegex.test(message)) {
-    request('https://api.cryptonator.com/api/ticker/ltc-usd', function(err, res, body) {
-      let json = JSON.parse(body);
-      console.log(json);
-      console.log(json["ticker"]);
-      let curPrice = Number((parseFloat(json["ticker"]["price"])).toFixed(2));
-      botResponse = "Litecoin's price is currently at $" + curPrice + ".";
-
-      let url = 'https://api.groupme.com/v3/bots/post';
-      let package = {};
-      package.text = botResponse;
-      package.bot_id = botID;
-      request( { url:url, method:'POST', body: JSON.stringify(package) });
-    });
-  }
-  else if (nasaPicRegex.test(message)) {
-    let searchURL = 'https://api.nasa.gov/planetary/apod?api_key=' + process.env.NASA_KEY;
-    console.log(searchURL);
-    request(searchURL, function(err, res, body) {
-      let json = JSON.parse(body);
-      botResponse = json["url"];
-
-      let url = 'https://api.groupme.com/v3/bots/post';
-      let package = {};
-      package.text = botResponse;
-      package.bot_id = botID;
-      request( { url:url, method:'POST', body: JSON.stringify(package) });
-    });
-  }
-  else if (investigateRegex.test(message) && attachment && attachment.length > 0) {
-    request.post({
-      url: 'https://api.deepai.org/api/demographic-recognition',
-      headers: {
-        'Api-Key': process.env.DEEP_AI_KEY
-      },
-      formData: {
-        'image': attachment[0].url
-      }
-    }, function callback(err, httpResponse, body) {
-      if (err) {
-        console.error('request failed:', err);
-        return;
-      }
-      let response = JSON.parse(body);
-      for (let i = 0; i < response["output"]["faces"].length; i++) {
-        let person = response["output"]["faces"][i];
-        botResponse = "Person #" + parseInt(i + 1) + " is a " + person.cultural_appearance + " " +
-        person.gender + " between the ages of " + person.age_range[0] + " and " + person.age_range[1] + ".";
-
-        let url = 'https://api.groupme.com/v3/bots/post';
-        let package = {};
-        package.text = botResponse;
-        package.bot_id = botID;
-        request( { url:url, method:'POST', body: JSON.stringify(package) });
-      }
-    });
-  }
-  else if (exaggerateRegex.test(message) && attachment && attachment.length > 0) {
-    request.post({
-      url: 'https://api.deepai.org/api/deepdream',
-      headers: {
-        'Api-Key':  process.env.DEEP_AI_KEY
-      },
-      formData: {
-        'content': attachment[0].url
-      }
-    }, function callback(err, httpResponse, body) {
-      if (err) {
-        console.error('request failed:', err);
-        return;
-      }
-      var response = JSON.parse(body);
-      console.log(response);
-
-      botResponse = response["output_url"];
-
-      let url = 'https://api.groupme.com/v3/bots/post';
-      let package = {};
-      package.text = botResponse;
-      package.bot_id = botID;
-      request( { url:url, method:'POST', body: JSON.stringify(package) });
-    });
-  }
+  // if (cryptoRegex.test(message)) {
+  //   request('https://api.cryptonator.com/api/ticker/ltc-usd', function(err, res, body) {
+  //     let json = JSON.parse(body);
+  //     console.log(json);
+  //     console.log(json["ticker"]);
+  //     let curPrice = Number((parseFloat(json["ticker"]["price"])).toFixed(2));
+  //     botResponse = "Litecoin's price is currently at $" + curPrice + ".";
+  //
+  //     let url = 'https://api.groupme.com/v3/bots/post';
+  //     let package = {};
+  //     package.text = botResponse;
+  //     package.bot_id = botID;
+  //     request( { url:url, method:'POST', body: JSON.stringify(package) });
+  //   });
+  // }
+  // else if (nasaPicRegex.test(message)) {
+  //   let searchURL = 'https://api.nasa.gov/planetary/apod?api_key=' + process.env.NASA_KEY;
+  //   console.log(searchURL);
+  //   request(searchURL, function(err, res, body) {
+  //     let json = JSON.parse(body);
+  //     botResponse = json["url"];
+  //
+  //     let url = 'https://api.groupme.com/v3/bots/post';
+  //     let package = {};
+  //     package.text = botResponse;
+  //     package.bot_id = botID;
+  //     request( { url:url, method:'POST', body: JSON.stringify(package) });
+  //   });
+  // }
+  // else if (investigateRegex.test(message) && attachment && attachment.length > 0) {
+  //   request.post({
+  //     url: 'https://api.deepai.org/api/demographic-recognition',
+  //     headers: {
+  //       'Api-Key': process.env.DEEP_AI_KEY
+  //     },
+  //     formData: {
+  //       'image': attachment[0].url
+  //     }
+  //   }, function callback(err, httpResponse, body) {
+  //     if (err) {
+  //       console.error('request failed:', err);
+  //       return;
+  //     }
+  //     let response = JSON.parse(body);
+  //     for (let i = 0; i < response["output"]["faces"].length; i++) {
+  //       let person = response["output"]["faces"][i];
+  //       botResponse = "Person #" + parseInt(i + 1) + " is a " + person.cultural_appearance + " " +
+  //       person.gender + " between the ages of " + person.age_range[0] + " and " + person.age_range[1] + ".";
+  //
+  //       let url = 'https://api.groupme.com/v3/bots/post';
+  //       let package = {};
+  //       package.text = botResponse;
+  //       package.bot_id = botID;
+  //       request( { url:url, method:'POST', body: JSON.stringify(package) });
+  //     }
+  //   });
+  // }
+  // else if (exaggerateRegex.test(message) && attachment && attachment.length > 0) {
+  //   request.post({
+  //     url: 'https://api.deepai.org/api/deepdream',
+  //     headers: {
+  //       'Api-Key':  process.env.DEEP_AI_KEY
+  //     },
+  //     formData: {
+  //       'content': attachment[0].url
+  //     }
+  //   }, function callback(err, httpResponse, body) {
+  //     if (err) {
+  //       console.error('request failed:', err);
+  //       return;
+  //     }
+  //     var response = JSON.parse(body);
+  //     console.log(response);
+  //
+  //     botResponse = response["output_url"];
+  //
+  //     let url = 'https://api.groupme.com/v3/bots/post';
+  //     let package = {};
+  //     package.text = botResponse;
+  //     package.bot_id = botID;
+  //     request( { url:url, method:'POST', body: JSON.stringify(package) });
+  //   });
+  // }
 }
 
 exports.respond = respond;
