@@ -21,8 +21,8 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 ```
 $ heroku create
-git add .
-git commit -m "first commit"
+$ git add .
+$ git commit -m "first commit"
 $ git push heroku master
 ```
 
