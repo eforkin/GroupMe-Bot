@@ -53,6 +53,7 @@ function postMessage(message, name, attachment) {
     let exaggerateRegex = /[eE][xX][aA][gG][gG][eE][rR][aA][tT][eE]/;
     let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/
     let nasaPicRegex = /[sS][pP][aA][cC][eE] [pP][iI][cC]/;
+    let colorizeRegex = /[cC][oO][lL][oO][rR][iI][zZ][eE]/;
 
     let botResponse;
 
@@ -151,7 +152,7 @@ function postMessage(message, name, attachment) {
         request( { url:url, method:'POST', body: JSON.stringify(package) });
       });
     }
-    else if (exaggerateRegex.test(message) && attachment && attachment.length > 0) {
+    else if (colorizeRegex.test(message) && attachment && attachment.length > 0) {
       request.post({
         url: 'https://api.deepai.org/api/colorizer',
         headers: {
