@@ -54,6 +54,7 @@ function postMessage(message, name, attachment) {
     let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/
     let nasaPicRegex = /[sS][pP][aA][cC][eE] [pP][iI][cC]/;
     let whereRegex = /[wW][hH][eE][rR][eE] [iI][sS] [tT][hH][iI][sS]/;
+    let combineRegex = /[cC][oO][mM][bB][iI][nN][eE]/;
 
     let botResponse;
 
@@ -152,7 +153,8 @@ function postMessage(message, name, attachment) {
         request( { url:url, method:'POST', body: JSON.stringify(package) });
       });
     }
-    else if (whereRegex.test(message) && attachment && attachment.length > 0) {
+    else if (combineRegex.test(message) && attachment && attachment.length == 2) {
+        console.log(attachment);
       request.post({
         url: 'https://api.deepai.org/api/CNNMRF',
         headers: {
