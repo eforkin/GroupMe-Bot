@@ -23,7 +23,7 @@ function respond(req, res) {
 
   form.on('end', function() {
 
-    if (messageFields["name"] != botName && messageFields["id"] != botID) {
+    if (messageFields["name"] != botName) {
 
       console.log(messageFields);
 
