@@ -53,7 +53,7 @@ function postMessage(message, name, attachment) {
     let exaggerateRegex = /[eE][xX][aA][gG][gG][eE][rR][aA][tT][eE]/;
     let captionThisRegex = /[cC][aA][pP][tT][iI][oO][nN] [tT][hH][iI][sS]/
     let nasaPicRegex = /[sS][pP][aA][cC][eE] [pP][iI][cC]/;
-    let colorizeRegex = /[cC][oO][lL][oO][rR][iI][zZ][eE]/;
+    let whereRegex = /[wW][hH][eE][rR][eE] [iI][sS] [tT][hH][iI][sS]/;
 
     let botResponse;
 
@@ -152,7 +152,7 @@ function postMessage(message, name, attachment) {
         request( { url:url, method:'POST', body: JSON.stringify(package) });
       });
     }
-    else if (colorizeRegex.test(message) && attachment && attachment.length > 0) {
+    else if (whereRegex.test(message) && attachment && attachment.length > 0) {
       request.post({
         url: 'https://api.deepai.org/api/colorizer',
         headers: {
@@ -169,7 +169,7 @@ function postMessage(message, name, attachment) {
         var response = JSON.parse(body);
         console.log(response);
 
-        botResponse = response["output_url"];
+        botResponse = response["output"]["name"];
 
         let url = 'https://api.groupme.com/v3/bots/post';
         let package = {};
